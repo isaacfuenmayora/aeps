@@ -1,18 +1,17 @@
 name: GameCI Template 🎮
 on:
   push:
-    branches:
-    - master
+    branches: ['**']
   pull_request:
-    branches:
-    - master
+    branches: [master]
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
   testRunner:
-    name: Test in ${{ matrix.testMode }} ✨
+#     name: Test in ${{ matrix.testMode }} ✨
+    name: Tester
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -60,7 +59,7 @@ jobs:
           path: ${{ steps.testRunner.outputs.artifactsPath }}
 
   buildWebGL:
-    needs: testRunner
+#     needs: testRunner
     name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
     strategy:
@@ -102,7 +101,7 @@ jobs:
           path: build/WebGL
 
   buildWindows:
-    needs: testRunner
+#     needs: testRunner
     name: Build for Windows 🖥️
     runs-on: ubuntu-latest
     strategy:
@@ -144,7 +143,7 @@ jobs:
           path: build/StandaloneWindows64
 
   buildAndroid:
-    needs: testRunner
+#     needs: testRunner
     name: Build for Android 📱
     runs-on: ubuntu-latest
     strategy:
